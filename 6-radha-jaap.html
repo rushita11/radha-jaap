@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .radha-text {
+        position: absolute;
+        bottom: 50%;
+        font-size: 24px;
+        font-weight: bold;
+        opacity: 0;
+        animation: moveUpFade 2s ease-out forwards;
+        color: black;
+        z-index: 99;
+    }
+
+    @keyframes moveUpFade {
+
+        0% {
+            bottom: 20%;
+            opacity: 0;
+            transform: translateX(0);
+        }
+
+        25% {
+            opacity: 1;
+            transform: translateX(20px);
+        }
+
+        50% {
+            opacity: 0.7;
+            transform: translateX(20px);
+        }
+
+        75% {
+            opacity: 0.3;
+            transform: translateX(30px);
+        }
+
+        100% {
+            bottom: 100%;
+            opacity: 1;
+            transform: translateX(35px);
+        }
+    }
+
+    #progress {
+        height: 200px;
+        width: 200px;
+        border: 10px solid black;
+        border-radius: 100%;
+        background-color: white;
+    }
+
+    #progressBar {
+        height: 100%;
+        width: 0;
+        background-color: green;
+        border-radius: 100%;
+        animation: fillProgress 5s linear forwards;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        cursor: pointer;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    }
+
+    .jaap-counter-screen {
+        display: none;
+    }
+
+    .phone-screen {
+        background-color: white;
+        border: 10px solid black;
+        border-radius: 50px;
+        max-width: 350px;
+        min-height: 90vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .phone-screen:after {
+        height: 30px;
+        width: 180px;
+        content: "";
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        border-radius: 0px 0px 20px 20px;
+        background-color: black;
+        top: 0px;
+        z-index: 999;
+    }
+
+    .home-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 32px 18px;
+        gap: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75));
+    }
+
+    .app-header {
+        width: 100%;
+        max-width: 300px;
+        /* display: flex; */
+        /* align-items: center; */
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 20px;
+        background: rgba(255, 152, 0, 0.14);
+        box-shadow: 0 16px 30px rgba(255, 152, 0, 0.18);
+        text-align: center;
+    }
+
+    .app-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #ff9800 0%, #ff6b00 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+        margin: 0px auto 10px;
+        box-shadow: 0 10px 18px rgba(255, 152, 0, 0.25);
+    }
+
+    .app-title h1 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: #2a2a2a;
+        letter-spacing: 0.02em;
+    }
+
+    .app-title p {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: rgba(34, 34, 34, 0.7);
+    }
+
+    .today-jaap {
+        width: 100%;
+        max-width: 300px;
+        padding: 18px 20px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 165, 0, 0.35);
+        background: rgba(255, 165, 0, 0.12);
+        text-align: center;
+    }
+
+    .intro-card {
+        width: 100%;
+        max-width: 300px;
+        padding: 18px 20px;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.82);
+        text-align: center;
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .intro-text {
+        margin: 0 0 14px;
+        font-size: 16px;
+        color: rgba(30, 30, 30, 0.85);
+        line-height: 1.4;
+
+    }
+
+    .name-select-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: left;
+        margin-bottom: 14px;
+    }
+
+    .name-select-label {
+        font-size: 13px;
+        color: rgba(30, 30, 30, 0.7);
+    }
+
+    .name-select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .name-select:focus {
+        border-color: rgba(255, 152, 0, 0.7);
+        box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.15);
+    }
+
+    .current-mantra {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-size: 14px;
+        color: rgba(30, 30, 30, 0.85);
+        font-weight: 600;
+        position: absolute;
+        top: 87px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+
+    .current-label {
+        opacity: 0.7;
+        font-weight: 500;
+    }
+
+    .today-jaap p {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .today-jaap p:first-child {
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        color: rgba(20, 20, 25, 0.75);
+        text-transform: uppercase;
+    }
+
+    #today-jaap {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ff9800;
+        margin: 10px 0 4px;
+    }
+
+    #goal {
+        font-size: 12px;
+        color: rgba(20, 20, 25, 0.7);
+    }
+
+    .start-jap {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .start-jap button {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 26px;
+        border: none;
+        background: linear-gradient(135deg, #ff9800 0%, #ff6b00 100%);
+        color: white;
+        cursor: pointer;
+        /* box-shadow: 0 14px 24px rgba(255, 152, 0, 0.35); */
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+
+    .start-jap button:active {
+        transform: translateY(0);
+        box-shadow: 0 10px 18px rgba(255, 152, 0, 0.35);
+    }
+
+    .streak-banner {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 22px;
+        padding: 14px 16px;
+        background: linear-gradient(135deg, #9c27b0 0%, #f44336 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        box-shadow: 0 16px 30px rgba(156, 39, 176, 0.25);
+        cursor: pointer;
+    }
+
+    .streak-icon {
+        font-size: 24px;
+    }
+
+    .streak-text {
+        flex: 1;
+        color: white;
+        text-align: left;
+    }
+
+    .streak-title {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .streak-sub {
+        font-size: 12px;
+        opacity: 0.9;
+    }
+
+    .streak-arrow {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    #naam-jaap {
+        position: relative;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        width: 330px;
+    }
+
+    #animateBtn {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        /* border: 1px solid pink; */
+
+        z-index: 999;
+        cursor: pointer;
+        border-radius: 50px;
+    }
+
+    .count-div {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        font-size: 18px;
+        font-weight: bold;
+        background: conic-gradient(#ff3800 0.000deg, rgb(220 83 0 / 28%) 0deg);
+        height: 200px;
+        width: 200px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-direction: column;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .counter-inner-div {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        flex-direction: column;
+        height: 180px;
+        width: 180px;
+        border-radius: 100%;
+        justify-content: center;
+    }
+
+    #count {
+        color: #667eea;
+        font-size: 40px;
+    }
+
+    .mala-count-div {
+        position: absolute;
+        top: 280px;
+        height: fit-content;
+        text-align: center;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        font-weight: bold;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .mala-count-div p {
+        color: #999;
+        font-size: 14px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    #mala {
+        display: inline-block;
+        font-family: 'Arial', sans-serif;
+        font-size: 18px;
+
+    }
+
+    /* full overlay */
+    .mala-win {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(8, 8, 12, 0.55);
+        z-index: 99999;
+        overflow: hidden;
+    }
+
+    .mala-win.show {
+        display: flex;
+    }
+
+    .mala-win__card {
+        position: relative;
+        z-index: 2;
+        width: min(320px, 86vw);
+        padding: 18px 18px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+
+    }
+
+    /* petals layer */
+    .petal-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .session-popup {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 12, 0.65);
+        backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 9999;
+    }
+
+    .session-popup.show {
+        display: flex;
+    }
+
+    .session-popup-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 18px;
+        max-width: 360px;
+        width: 100%;
+        padding: 22px 18px;
+        text-align: center;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .session-popup-card p:first-child {
+        margin-bottom: 12px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1f1f2e;
+    }
+
+    .session-popup-card p+p {
+        margin-bottom: 18px;
+        color: #343a40;
+        font-size: 0.95rem;
+    }
+
+    .summary-screen {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 12, 0.65);
+        backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 9999;
+    }
+
+    .summary-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 18px;
+        max-width: 360px;
+        width: 100%;
+        padding: 22px 18px;
+        text-align: center;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .summary-card h2 {
+        margin: 0 0 14px;
+        font-size: 1.25rem;
+        letter-spacing: 0.02em;
+        color: #1f1f2e;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        color: rgba(20, 20, 25, 0.75);
+        font-size: 0.95rem;
+    }
+
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+
+    .summary-value {
+        font-weight: 700;
+        color: #ff9800;
+    }
+
+    .summary-close {
+        margin-top: 18px;
+        width: 100%;
+        padding: 12px 0;
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ff9800 0%, #ff6b00 100%);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 14px 24px rgba(255, 152, 0, 0.35);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-div {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-div button {
+        border: 1px solid rgba(51, 51, 51, 0.2);
+        border-radius: 12px;
+        padding: 10px 16px;
+        min-width: 110px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    #calcelBtn {
+        background: rgba(255, 255, 255, 0.9);
+        color: #2c3e50;
+    }
+
+    #confirmBtn {
+        background: #4f5bd5;
+        color: white;
+        border: none;
+    }
+
+    .back-button {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.35);
+        color: white;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); */
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        user-select: none;
+        z-index: 999;
+    }
+
+    #time {
+        position: absolute;
+        top: 50px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        width: fit-content;
+        background-color: #f1f5f9;
+        border-radius: 30px;
+        padding: 5px 10px;
+    }
+
+    .back-button:hover {
+        background: rgba(0, 0, 0, 0.45);
+    }
+</style>
+
+<body>
+    <div class="phone-screen">
+        <div class="home-screen">
+
+            <div class="app-header">
+                <div class="app-icon">🕉️</div>
+                <div class="app-title">
+                    <h1>Radha Naam Japa</h1>
+                    <p>Divine Counter</p>
+                </div>
+            </div>
+
+            <div class="today-jaap">
+                <p>Today's Japa</p>
+                <p id="today-jaap">0</p>
+                <!-- <p id="goal">Goal <span id="todayGoal"></span></p> -->
+            </div>
+
+            <!-- <div class="streak-banner">
+                <div class="streak-icon">🔥</div>
+                <div class="streak-text">
+                    <div class="streak-title">Ongoing Streak</div>
+                    <div class="streak-sub">5 days in a row</div>
+                </div>
+                <div class="streak-arrow">➔</div>
+            </div> -->
+
+            <div class="intro-card">
+                <p class="intro-text">Begin your spiritual journey with Radha Naam Japa</p>
+                <div class="name-select-wrap">
+                    <label for="jaapName" class="name-select-label">Choose your Mantra</label>
+                    <select id="jaapName" class="name-select">
+                        <option value="राधा">Radha</option>
+                        <option value="कृष्ण">Krishna</option>
+                        <option value="राम">Ram</option>
+                        <option value="सीता">Sita</option>
+                        <option value="शिव">Shiva</option>
+                    </select>
+                </div>
+                <div class="start-jap">
+                    <button id="startJaap">Start Naam Jaap</button>
+                </div>
+                <!-- <div class="streak-sub">Win prize up to ₹10K gift card</div> -->
+                <!-- </div> -->
+                <!-- <div class="streak-arrow">➔</div> -->
+            </div>
+        </div>
+        <div class="jaap-counter-screen">
+            <p id="time">00 : 00 : 00</p>
+            <div class="current-mantra">
+                <span class="current-label">Chanting:</span>
+                <span id="currentMantra">Radha</span>
+            </div>
+            <div class="back-button">Back</div>
+            <div class="count-div" id="count-div">
+                <div class="counter-inner-div">
+                    <p id="count">0</p>
+                    <p class="count-text">Total Japa</p>
+                </div>
+            </div>
+            <div class="mala-count-div">
+                <p>Total mala:</p>
+                <span id="mala">0</span>
+            </div>
+            <div id="naam-jaap"></div>
+            <div id="malaWin" class="mala-win" aria-hidden="true">
+                <div class="mala-win__card">
+                    <div class="mala-win__title">🌸 <span id="showMalaCount"></span> Mala Completed</div>
+                    <div class="mala-win__sub">Radhe Radhe 🙏</div>
+                </div>
+            </div>
+            <div class="session-popup">
+                <div class="session-popup-card">
+                    <p>End Japa Session</p>
+                    <div>
+                        <p>Are you sure to end japa session? Your progress will be saved.</p>
+                        <div class="btn-div">
+                            <button id="calcelBtn">Cancel</button>
+                            <button id="confirmBtn">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <audio src="./image/radhe-1.mp3" id="audio" autoStart="false"></audio>
+        </div>
+        <div class="summary-screen">
+            <div class="summary-card">
+                <h2>Session Summary</h2>
+                <div class="summary-row">
+                    <span>Total Japa</span>
+                    <span class="summary-value" id="summaryTotalJapa">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Total Mala</span>
+                    <span class="summary-value" id="summaryTotalMala">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Session Time</span>
+                    <span class="summary-value">00:00</span>
+                </div>
+                <button id="backJap" class="summary-close">Back to Japa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // keeps track of how many clicks have been made within the current mala
+        // this value is used to compute the degree of the circular progress bar
+        let degCounter = 1;
+        let deg;
+        const countEle = document.getElementById('count-div');     // outer ring
+        const startJaap = document.getElementById('startJaap');
+        const jaapCounterScreen = document.querySelector('.jaap-counter-screen');
+        const homeScreen = document.querySelector('.home-screen');
+        const backBtn = document.querySelector('.back-button');
+        let todayJaap = document.getElementById('today-jaap');
+        let count = document.getElementById('count'); // current click count display
+        let mala = document.getElementById('mala');      // number of completed malas display
+        const total = 10;
+        const jaapName = document.getElementById('jaapName');
+        const currentMantra = document.getElementById('currentMantra');
+
+
+        // const todayGoal = document.getElementById('todayGoal');
+        // todayGoal.innerHTML = `${completedJaap} / 108`
+        const calcelBtn = document.getElementById('calcelBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const sessionPopup = document.querySelector('.session-popup');
+        const summaryScreen = document.querySelector('.summary-screen');
+        const backJap = document.getElementById('backJap');
+        let timerStarted = false
+
+        function homeScreenFn() {
+            homeScreen.style.display = "flex"
+            // const completedJaap = localStorage.getItem('jaapCount') || 0
+            const completeJaap = JSON.parse(localStorage.getItem('jaapCounts')) || {}
+
+            todayJaap.innerText = completeJaap[jaapName.value] || 0;
+            if (currentMantra) currentMantra.innerText = jaapName.value;
+        }
+        jaapName.addEventListener('change', function () {
+            const completeJaap = JSON.parse(localStorage.getItem('jaapCounts')) || {}
+
+            todayJaap.innerText = completeJaap[jaapName.value] || 0;
+            if (currentMantra) currentMantra.innerText = jaapName.value;
+        })
+        function japCounterScrrenFn() {
+            count.innerText = 0
+            mala.innerText = 0
+            degCounter = 1
+            deg = 0;
+            countEle.style.background = `conic-gradient(#ff3800 ${deg}deg, rgba(220,83,0,0.28) ${deg}deg)`;
+        }
+        function japCounterFn() {
+            if (degCounter > total) degCounter = 1;
+            // calculate how far around the circle we should fill
+            deg = (degCounter / total) * 360;
+            const accent = '#ff3800';               // progress colour
+            const bg = 'rgba(220,83,0,0.28)';       // track/background colour
+
+            // paint the conic-gradient; if exactly full, render a solid circle
+            if (deg >= 360) {
+                countEle.style.background = `conic-gradient(${accent} 0deg, ${accent} 360deg)`;
+            } else {
+                countEle.style.background = `conic-gradient(${accent} ${deg}deg, ${bg} ${deg}deg)`;
+            }
+        }
+        startJaap.addEventListener('click', function () {
+            homeScreen.style.display = "none"
+            jaapCounterScreen.style.display = "block"
+            localStorage.setItem('currentJap', 0)
+            localStorage.setItem('mala', 0)
+            japCounterScrrenFn()
+        })
+
+        backBtn.addEventListener('click', function (e) {
+            e.stopPropagation()
+            sessionPopup.classList.add("show")
+            backBtn.style.display = "none"
+        })
+        calcelBtn.addEventListener('click', function (e) {
+            e.stopPropagation()
+            sessionPopup.classList.remove("show");
+            backBtn.style.display = "block"
+        })
+        confirmBtn.addEventListener('click', function (e) {
+            e.stopPropagation()
+            summaryScreen.style.display = "flex"
+            jaapCounterScreen.style.display = "none"
+            summeryScreen()
+        })
+        backJap.addEventListener('click', function (e) {
+            e.stopPropagation()
+            summaryScreen.style.display = "none"
+            jaapCounterScreen.style.display = "none"
+            sessionPopup.classList.remove("show");
+            backBtn.style.display = "block"
+            homeScreenFn()
+
+        })
+        function summeryScreen() {
+            let summaryTotalJapa = document.getElementById('summaryTotalJapa');
+            let summaryTotalMala = document.getElementById('summaryTotalMala');
+            summaryTotalJapa.innerText = localStorage.getItem('currentJap')
+            summaryTotalMala.innerText = localStorage.getItem('mala')
+        }
+        /**
+         * display a brief full‑mala notification overlay.
+         * it adds a CSS class to fade the overlay in, then removes it after 4s.
+         * the `layer` element (petal layer) is cleared as well.
+         */
+        function showMalaWin() {
+            const overlay = document.getElementById("malaWin");
+            overlay.classList.add("show");
+            setTimeout(() => {
+                overlay.classList.remove("show");
+            }, 4000);
+        }
+        function setAudio(audio) {
+            switch (jaapName.value) {
+                case "कृष्ण":
+                    audio.src = './image/krushna.mp3'
+                    break
+                case "राधा":
+                    audio.src = "./image/radhe-1.mp3"
+                    break
+                case "शिव":
+                    audio.src = "./image/shiv.mp3"
+                    break
+                case "राम":
+                    audio.src = "./image/ram.mp3"
+                    break
+                case "सीता":
+                    audio.src = "./image/sita-1.mp3"
+                    break
+                default:
+                    audio.src = "./image/radhe-1.mp3"
+
+            }
+        }
+        // clicking anywhere on the body increments the count and updates UI
+        function handleJaap(e) {
+            if (!timerStarted) {
+                timerStarted = true;
+                setInterval(displayTime, 1000)
+            }
+            const overlay = document.getElementById("malaWin");
+
+            // if overlay is open, stop the event
+            if (overlay.classList.contains("show") || sessionPopup.classList.contains('show')) {
+                return;
+            }
+            e.stopPropagation()
+            // element references used throughout the handler
+            // const countEle = document.getElementById('count-div');     // outer ring
+            const showMalaCount = document.getElementById('showMalaCount'); // overlay text
+            // number of names per mala (fixed constant)
+
+            // const count = document.getElementById('count'); // current click count display
+
+            let malaCount = parseInt(mala.innerText) || 0;   // parsed integer (fallback 0)
+            let countNumber = Number(localStorage.getItem('currentJap')); // parsed click count
+            // wrap the counter back to 1 once we exceed the total count
+            japCounterFn()
+
+            // audio feedback: reset to start then play
+            let audio = document.getElementById('audio');
+            setAudio(audio)
+
+            audio.currentTime = 0;
+            audio.play();
+
+            // create a floating "राधा" element for visual effect
+            const naamJaap = document.getElementById('naam-jaap');
+            const span = document.createElement('span');
+            span.textContent = jaapName.value;
+            span.className = 'radha-text';
+
+            // random horizontal position and random text colour
+            span.style.left = `calc(${Math.random() * 80 + 10}% - 70px)`;
+            span.style.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
+            // increment displayed counts
+            // const previousJaap = localStorage.getItem('jaapCount') || 0
+            const jaapNames = jaapName.value
+
+            let jaapData = JSON.parse(localStorage.getItem("jaapCounts")) || {};
+            if (!jaapData[jaapNames]) {
+                jaapData[jaapNames] = 0;
+            }
+
+            jaapData[jaapNames] += 1;
+            localStorage.setItem("jaapCounts", JSON.stringify(jaapData));
+            count.innerText = countNumber + 1;
+            // const totalJaap = Number(previousJaap) + 1
+            // localStorage.setItem('jaapCount', totalJaap)
+            localStorage.setItem('currentJap', countNumber + 1)
+            countNumber++;
+            degCounter++;
+
+            // when the click count reaches a multiple of `total`, a mala is done
+            if (Number(countNumber) === Number(total * (malaCount + 1))) {
+                malaCount++;
+                mala.innerText = `${malaCount}`;
+                showMalaCount.innerText = `${malaCount}`;
+                showMalaWin(); // show the completion overlay
+            }
+            localStorage.setItem('mala', malaCount)
+
+            // insert the floating span and schedule its removal
+            naamJaap.appendChild(span);
+            setTimeout(() => { span.remove(); }, 3000);
+        }
+        jaapCounterScreen.addEventListener('click', handleJaap);
+        homeScreenFn()
+        document.addEventListener('keydown', function (e) {
+            if (e.key === " " || e.key === "Enter") {
+                handleJaap(e);
+            }
+        })
+        const times = document.getElementById('time');
+        let second = 0
+        let minute = 0
+        let hour = 0
+        function displayTime() {
+            if (second === 60) {
+                minute += 1
+                second = 0
+            }
+            if (minute === 60) {
+                hour += 1
+                minute = 0
+            }
+            second++;
+            times.innerHTML = `${String(hour).padStart(2, '0')} : ${String(minute).padStart(2, '0')} : ${String(second).padStart(2, '0')}`
+        }
+
+
+
+        // const time = new Date().toLocaleTimeString();
+        // console.log(time, "tmmmmmmmmmmmmmmm");
+
+        // if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        //     alert("Your browser does not support Speech Recognition. Please use a modern browser like Google Chrome.");
+        // } else {
+        // Use webkitSpeechRecognition for broader compatibility if SpeechRecognition is not directly available
+        // const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        // const recognition = new SpeechRecognition();
+
+        // let countRadha = 0;
+
+        // recognition.continuous = true;
+        // recognition.interimResults = true;
+        // recognition.lang = "en-US";
+
+        // recognition.onresult = (event) => {
+        //     // console.log("enter event");
+        //     // console.log(event.results, "event.results");
+
+        //     for (let i = event.resultIndex; i < event.results.length; i++) {
+        //         const spokenText = event.results[i][0].transcript.trim().toLowerCase();
+        //         const isFinal = event.results[i].isFinal;
+
+        //         if (
+        //             isFinal &&
+        //             (
+        //                 spokenText.includes("radha") ||
+        //                 spokenText.includes("radhe") ||
+        //                 spokenText.includes("rada")
+        //             )
+        //         ) {
+        //             countRadha++;
+        //             console.log("Radha count:", countRadha);
+        //         }
+        //     }
+        // };
+
+        // recognition.onerror = (e) => console.log("Error:", e.error);
+        // recognition.onend = () => {
+        //     console.log("recognition ended");
+        //      recognition.start();
+        // };
+        // document.addEventListener("click", () => {
+        //     recognition.start();
+        //     console.log("listening started");
+        // }, { once: true });
+
+    </script>
+</body>
+
+</html>
