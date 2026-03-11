@@ -345,20 +345,13 @@
         position: absolute;
         height: 100%;
         width: 100%;
-        /* border: 1px solid pink; */
-
         z-index: 999;
         cursor: pointer;
         border-radius: 50px;
     }
 
     .count-div {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        margin: auto;
+
         font-size: 18px;
         font-weight: bold;
         background: conic-gradient(#ff3800 0.000deg, rgb(220 83 0 / 28%) 0deg);
@@ -371,6 +364,20 @@
         font-size: 20px;
         flex-direction: column;
         font-family: 'Arial', sans-serif;
+    }
+
+    .counter-outer-div {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        row-gap: 10px;
     }
 
     .counter-inner-div {
@@ -390,14 +397,13 @@
     }
 
     .mala-count-div {
-        position: absolute;
-        top: 280px;
         height: fit-content;
         text-align: center;
-        bottom: 0px;
+        /* margin-top: 20px; */
+        /* bottom: 170px;
         left: 0px;
-        right: 0px;
-        margin: auto;
+        right: 0px; */
+        margin: 20px auto 0px;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
         display: flex;
@@ -604,19 +610,324 @@
     }
 
     #time {
-        position: absolute;
-        top: 50px;
-        left: 0px;
-        right: 0px;
-        margin: auto;
-        width: fit-content;
+        /* */
+
         background-color: #f1f5f9;
         border-radius: 30px;
         padding: 5px 10px;
     }
 
+    .play-pause-btn {
+        /* position: absolute; */
+        /* top: 18px; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
+        border: none;
+        background: transparent;
+        color: white;
+        border-radius: 999px;
+        /* padding: 10px 14px; */
+        font-size: 18px;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.15s ease;
+        z-index: 999;
+    }
+
+    .time-main-div {
+        display: flex;
+        top: 50px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        position: absolute;
+        width: fit-content;
+
+    }
+
     .back-button:hover {
         background: rgba(0, 0, 0, 0.45);
+    }
+
+    .sound-control {
+        position: absolute;
+        top: 70px;
+        left: 18px;
+        display: flex;
+        gap: 10px;
+        z-index: 999;
+    }
+
+    .sound-btn {
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.35);
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .sound-btn:hover {
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+
+    .play-pause-btn:hover {
+        /* background: rgba(0, 0, 0, 0.45);
+        transform: translateX(-50%) translateY(-1px); */
+    }
+
+    .reset-control {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 14px;
+        position: absolute;
+        bottom: 20px;
+        z-index: 1;
+    }
+
+    .reset-button {
+        border: none;
+        padding: 12px 18px;
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.35);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.15s ease;
+        font-size: 0.95rem;
+        min-width: 200px;
+    }
+
+    .reset-button:hover {
+        /* background: rgba(0, 0, 0, 0.45); */
+        /* transform: translateY(-1px); */
+    }
+
+    .open-gallery-btn {
+        position: absolute;
+        bottom: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: none;
+        padding: 12px 18px;
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.35);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.15s ease;
+        font-size: 0.95rem;
+        min-width: 200px;
+        z-index: 2;
+    }
+
+    .open-gallery-btn:hover {
+        background: rgba(0, 0, 0, 0.45);
+        transform: translateX(-50%) translateY(-1px);
+    }
+
+    .image-picker-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        z-index: 99999;
+    }
+
+    .image-picker-overlay.show {
+        display: flex;
+    }
+
+    .image-picker-sheet {
+        width: 100%;
+        max-width: 360px;
+        border-radius: 18px 18px 0 0;
+        background: #fff;
+        padding: 18px 16px 24px;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+        transform: translateY(100%);
+        transition: transform 0.25s ease;
+    }
+
+    .image-picker-overlay.show .image-picker-sheet {
+        transform: translateY(0);
+    }
+
+    .image-picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+    }
+
+    .image-picker-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #222;
+    }
+
+    .image-picker-close {
+        border: none;
+        background: transparent;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .image-picker-actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .image-picker-action {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+        text-align: center;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.75);
+    }
+
+    .image-picker-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .image-picker-item {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #ff9800 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 14px;
+        font-weight: 700;
+        overflow: hidden;
+    }
+
+    .image-picker-item img {
+        max-width: 100%;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        /* border-radius: 15px; */
+    }
+
+    .menu-btn {
+        width: 20px;
+        height: 20px;
+        border: none;
+        background: transparent;
+
+        /* border-radius: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        /* box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08); */
+        transition: 0.2s ease;
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        z-index: 999;
+    }
+
+    /* 
+    .menu-btn:hover {
+        background: #f0f0f0;
+    } */
+
+    .dropdown-menu {
+        position: absolute;
+        top: 42px;
+        right: 22px;
+        width: 145px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        /* padding: 5px 0; */
+        display: none;
+        z-index: 999;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .dropdown-item {
+        width: 100%;
+        padding: 6px 10px;
+        border: none;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background: #f6f6f6;
+    }
+
+    .wallpaper-div {
+        display: none;
+        height: 150px;
+        width: calc(100% - 20px);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 15px;
+    }
+
+    .wallpaper-div img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+    }
+
+    .wallpaper-div.show {
+        display: block;
+    }
+
+    .image-picker-item {
+        position: relative;
+    }
+
+    .image-picker-item.selected::after {
+        height: 16px;
+        width: 16px;
+        border-radius: 100%;
+        border: 1px solid orange;
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .image-picker-item.selected::before {
+        height: 12.7px;
+        width: 12.5px;
+        border-radius: 100%;
+        background-color: orange;
+        left: 12.4px;
+        top: 12.5px;
+        content: "";
+        position: absolute;
     }
 </style>
 
@@ -668,23 +979,72 @@
             </div>
         </div>
         <div class="jaap-counter-screen">
-            <p id="time">00 : 00 : 00</p>
+            <div class="time-main-div">
+                <button id="playPauseBtn" class="play-pause-btn" aria-label="Play/Pause">⏯️</button>
+                <p id="time">00 : 00 : 00</p>
+            </div>
+            <div class=""> <button class="menu-btn" id="menuBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="5" r="2" fill="#333"></circle>
+                        <circle cx="12" cy="12" r="2" fill="#333"></circle>
+                        <circle cx="12" cy="19" r="2" fill="#333"></circle>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item">Pick image</button>
+                    <!-- <button class="dropdown-item">Delete</button>
+                    <button class="dropdown-item">View</button> -->
+                </div>
+            </div>
             <div class="current-mantra">
                 <span class="current-label">Chanting:</span>
                 <span id="currentMantra">Radha</span>
             </div>
             <div class="back-button">Back</div>
-            <div class="count-div" id="count-div">
-                <div class="counter-inner-div">
-                    <p id="count">0</p>
-                    <p class="count-text">Total Japa</p>
+            <div class="sound-control" aria-label="Sound controls">
+                <button id="sound-on" class="sound-btn" aria-label="Sound on">🔊</button>
+                <button id="sound-off" class="sound-btn" aria-label="Sound off" style="display:none;">🔇</button>
+            </div>
+            <div class="counter-outer-div">
+                <div class="wallpaper-div">
+                    <img src="" alt="">
+                </div>
+                <div class="jaap-counter-outer-div">
+                    <div class="count-div" id="count-div">
+                        <div class="counter-inner-div">
+                            <p id="count">0</p>
+                            <p class="count-text">Total Japa</p>
+                        </div>
+                    </div>
+                    <div class="mala-count-div">
+                        <p>Total mala:</p>
+                        <span id="mala">0</span>
+                    </div>
                 </div>
             </div>
-            <div class="mala-count-div">
-                <p>Total mala:</p>
-                <span id="mala">0</span>
+
+            <!-- <button id="openGalleryBtn" class="open-gallery-btn">Open Image Picker</button> -->
+            <div class="reset-control">
+                <button id="resetBtn" class="reset-button">Reset</button>
             </div>
+
             <div id="naam-jaap"></div>
+            <div class="image-picker-overlay" id="imagePickerOverlay">
+                <div class="image-picker-sheet">
+                    <div class="image-picker-header">
+                        <div class="image-picker-title">Select an Image</div>
+                        <button class="image-picker-close" id="imagePickerClose">✕</button>
+                    </div>
+                    <div class="image-picker-actions">
+                        <!-- <div class="image-picker-action">Upload Image</div> -->
+                        <div class="image-picker-action">No Image</div>
+                    </div>
+                    <div class="image-picker-grid">
+                        <div class="image-picker-item"><img src="./image/radhe-krishna-img-1.jpg" alt=""></div>
+                        <div class="image-picker-item"><img src="./image/radhe-krishna-img-2.jpg" alt=""></div>
+                    </div>
+                </div>
+            </div>
             <div id="malaWin" class="mala-win" aria-hidden="true">
                 <div class="mala-win__card">
                     <div class="mala-win__title">🌸 <span id="showMalaCount"></span> Mala Completed</div>
@@ -703,7 +1063,7 @@
                     </div>
                 </div>
             </div>
-            <audio src="./image/radhe-1.mp3" id="audio" autoStart="false"></audio>
+            <audio src="./image/radhe-1.mp3" id="audio" autoStart="true"></audio>
         </div>
         <div class="summary-screen">
             <div class="summary-card">
@@ -730,6 +1090,17 @@
         // this value is used to compute the degree of the circular progress bar
         let degCounter = 1;
         let deg;
+        let jaapTimerId;
+        let wallpaperNew = JSON.parse(localStorage.getItem('wallpaperNew')) || {}
+
+        // let wallpaper = {}
+        const imagePaths = {
+            कृष्ण: ['krushna-1.jpg', 'krushna-2.jpg'],
+            राधा: ['radhe-krishna-img-1.jpg', 'radhe-krishna-img-2.jpg'],
+            सीता: ['sita-ram-1.jpg', 'sita-ram-2.jpg'],
+            राम: ['ram-1.jpg', 'ram-2.jpg'],
+            शिव: ['shiva-1.jpg', 'shiva-2.jpg']
+        }
         const countEle = document.getElementById('count-div');     // outer ring
         const startJaap = document.getElementById('startJaap');
         const jaapCounterScreen = document.querySelector('.jaap-counter-screen');
@@ -741,17 +1112,58 @@
         const total = 10;
         const jaapName = document.getElementById('jaapName');
         const currentMantra = document.getElementById('currentMantra');
-
-
-        // const todayGoal = document.getElementById('todayGoal');
-        // todayGoal.innerHTML = `${completedJaap} / 108`
         const calcelBtn = document.getElementById('calcelBtn');
         const confirmBtn = document.getElementById('confirmBtn');
         const sessionPopup = document.querySelector('.session-popup');
         const summaryScreen = document.querySelector('.summary-screen');
         const backJap = document.getElementById('backJap');
-        let timerStarted = false
+        const menuBtn = document.getElementById('menuBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        let audio = document.getElementById('audio');
+        const resetBtn = document.getElementById('resetBtn');
+        const soundOn = document.getElementById('sound-on');
+        const soundOff = document.getElementById('sound-off');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const imagePickerOverlay = document.getElementById('imagePickerOverlay');
+        const imagePickerClose = document.getElementById('imagePickerClose');
+        let wallpaper = document.getElementsByClassName('wallpaper-div')[0];
+        let wallpaperImage = wallpaper.querySelector('img');
 
+        soundOn.addEventListener("click", (e) => toggleSound(e))
+        soundOff.addEventListener("click", (e) => toggleSound(e))
+        playPauseBtn.addEventListener('click', (e) => togglePlayPause(e));
+        let selectedPath = ""
+        let isPlaying = false;
+        let timerStarted = false
+        imagePickerClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            imagePickerOverlay.classList.remove('show');
+        });
+        imagePickerOverlay.addEventListener('click', (e) => {
+            if (e.target === imagePickerOverlay) {
+                imagePickerOverlay.classList.remove('show');
+            }
+        });
+        resetBtn.addEventListener('click', (e) => resetFn(e))
+
+        function toggleSound(e) {
+            e.stopPropagation()
+            if (audio.muted) {
+                audio.muted = false
+                soundOn.style.display = "block"
+                soundOff.style.display = "none"
+            } else {
+                audio.muted = true
+                soundOn.style.display = "none"
+                soundOff.style.display = "block"
+            }
+        }
+        function resetFn(e) {
+            e.stopPropagation()
+            localStorage.setItem('currentJap', 0)
+            japCounterScreenFn()
+
+        }
         function homeScreenFn() {
             homeScreen.style.display = "flex"
             // const completedJaap = localStorage.getItem('jaapCount') || 0
@@ -759,14 +1171,87 @@
 
             todayJaap.innerText = completeJaap[jaapName.value] || 0;
             if (currentMantra) currentMantra.innerText = jaapName.value;
+            console.log(jaapName.value, "vallllllllll");
+
+            let storedWallpaper = JSON.parse(localStorage.getItem('wallpaperNew'));
+            console.log(storedWallpaper, "storedWallpaper");
+
+            if (storedWallpaper[jaapName.value]) {
+                wallpaperImage.src = storedWallpaper[jaapName.value];
+                wallpaper.classList.add('show')
+            } else {
+                wallpaperImage.src = "";
+                wallpaper.classList.remove('show')
+            }
         }
         jaapName.addEventListener('change', function () {
             const completeJaap = JSON.parse(localStorage.getItem('jaapCounts')) || {}
-
             todayJaap.innerText = completeJaap[jaapName.value] || 0;
             if (currentMantra) currentMantra.innerText = jaapName.value;
+            const images = document.querySelectorAll('.image-picker-item img')
+            const paths = imagePaths[jaapName.value];
+
+            storedWallpaper = JSON.parse(localStorage.getItem('wallpaperNew'));
+            // console.log(storedWallpaper, "storedWallpaper");
+            // console.log(storedWallpaper[jaapName.value], "storedWallpaper[jaapName.value]");
+
+            if (storedWallpaper[jaapName.value]) {
+                wallpaperImage.src = storedWallpaper[jaapName.value];
+                wallpaper.classList.add('show')
+            } else {
+                wallpaperImage.src = "";
+                wallpaper.classList.remove('show')
+            }
+            if (paths) {
+                images.forEach((image, index) => {
+                    if (paths[index]) {
+                        image.src = `./image/${paths[index]}`
+                    }
+                })
+            }
         })
-        function japCounterScrrenFn() {
+        menuBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show')
+        })
+        dropdownMenu.addEventListener('click', function (e) {
+            e.stopPropagation()
+            // const dropdownMenu = document.querySelectorAll('.dropdown-item');
+            if (e.target.classList.contains('dropdown-item')) {
+                const clickedChild = event.target;
+                const text = clickedChild.innerText
+                if (text === "Pick image") {
+                    dropdownMenu.classList.toggle('show')
+                    imagePickerOverlay.classList.add('show');
+                    const images = document.querySelectorAll('.image-picker-item img')
+                    images.forEach((image) => {
+                        console.log(image);
+                        image.addEventListener('click', function (e) {
+                            e.stopPropagation()
+                            images.forEach((image) => image.parentElement.classList.remove('selected'))
+                            selectedPath = this.getAttribute('src');
+                            console.log(selectedPath, "selectedPath");
+                            imagePickerOverlay.classList.remove('show');
+                            // const wallpaper = document.getElementsByClassName('wallpaper-div')[0];
+                            this.parentElement.classList.add('selected')
+                            // const wallpaperImage = wallpaper.querySelector('img');
+                            wallpaperImage.src = selectedPath
+                            wallpaper.classList.add('show')
+                            wallpaperNew[jaapName.value] = selectedPath;
+                            localStorage.setItem('wallpaperNew', JSON.stringify(wallpaperNew))
+                        })
+
+                    })
+
+
+                } else if (text === "Delete") {
+                    console.log("delete button is clicked");
+                } else {
+                    console.log("view button clicked");
+                }
+            }
+        })
+        function japCounterScreenFn() {
             count.innerText = 0
             mala.innerText = 0
             degCounter = 1
@@ -792,7 +1277,7 @@
             jaapCounterScreen.style.display = "block"
             localStorage.setItem('currentJap', 0)
             localStorage.setItem('mala', 0)
-            japCounterScrrenFn()
+            japCounterScreenFn()
         })
 
         backBtn.addEventListener('click', function (e) {
@@ -836,7 +1321,7 @@
             overlay.classList.add("show");
             setTimeout(() => {
                 overlay.classList.remove("show");
-            }, 4000);
+            }, 700);
         }
         function setAudio(audio) {
             switch (jaapName.value) {
@@ -857,15 +1342,51 @@
                     break
                 default:
                     audio.src = "./image/radhe-1.mp3"
-
             }
+        }
+        // let firstClick = truez
+
+        function togglePlayPause(e) {
+            console.log("function call");
+
+            // e.stopPropagation();
+            // isPlaying = !isPlaying;
+            // playPauseBtn.innerText = isPlaying ? '⏸️' : '▶️';
+            // console.log(firstClick, "firstClick");
+
+            // if (firstClick) {
+            //     timerStarted = false
+            //     return
+            // }
+            // if (!isPlaying) {
+            //     clearInterval(jaapTimerId)
+            //     jaapTimerId = null
+            // }
+            // else {
+            //     console.log("play function call");
+
+            //     console.log("hello first click is false");
+
+            //     handleJaap(e)
+            // }
         }
         // clicking anywhere on the body increments the count and updates UI
         function handleJaap(e) {
+            // if (!firstClick) {
+            //     if (!isPlaying) {
+            //         return;
+            //     }
+            // }
+
             if (!timerStarted) {
                 timerStarted = true;
-                setInterval(displayTime, 1000)
+                jaapTimerId = setInterval(displayTime, 1000)
             }
+            // if (firstClick) {
+            //     togglePlayPause(e)
+            //     firstClick = false
+            // }
+
             const overlay = document.getElementById("malaWin");
 
             // if overlay is open, stop the event
@@ -873,23 +1394,15 @@
                 return;
             }
             e.stopPropagation()
-            // element references used throughout the handler
-            // const countEle = document.getElementById('count-div');     // outer ring
             const showMalaCount = document.getElementById('showMalaCount'); // overlay text
             // number of names per mala (fixed constant)
-
-            // const count = document.getElementById('count'); // current click count display
-
             let malaCount = parseInt(mala.innerText) || 0;   // parsed integer (fallback 0)
             let countNumber = Number(localStorage.getItem('currentJap')); // parsed click count
             // wrap the counter back to 1 once we exceed the total count
             japCounterFn()
 
             // audio feedback: reset to start then play
-            let audio = document.getElementById('audio');
             setAudio(audio)
-
-            audio.currentTime = 0;
             audio.play();
 
             // create a floating "राधा" element for visual effect
@@ -914,8 +1427,6 @@
             jaapData[jaapNames] += 1;
             localStorage.setItem("jaapCounts", JSON.stringify(jaapData));
             count.innerText = countNumber + 1;
-            // const totalJaap = Number(previousJaap) + 1
-            // localStorage.setItem('jaapCount', totalJaap)
             localStorage.setItem('currentJap', countNumber + 1)
             countNumber++;
             degCounter++;
@@ -934,6 +1445,7 @@
             setTimeout(() => { span.remove(); }, 3000);
         }
         jaapCounterScreen.addEventListener('click', handleJaap);
+
         homeScreenFn()
         document.addEventListener('keydown', function (e) {
             if (e.key === " " || e.key === "Enter") {
@@ -956,7 +1468,13 @@
             second++;
             times.innerHTML = `${String(hour).padStart(2, '0')} : ${String(minute).padStart(2, '0')} : ${String(second).padStart(2, '0')}`
         }
+        jaapName.addEventListener('change', function () {
+            console.log("change event call");
 
+
+            wallpaperNew[jaapName.value] = selectedPath
+
+        })
 
 
         // const time = new Date().toLocaleTimeString();
